@@ -40,7 +40,7 @@ public class CookController {
     }
 
     @ApiOperation(value = "检测菜名")
-    @GetMapping("/receipt")
+    @GetMapping("/cook")
     public Map<String, Object> check(){
         Map<String, Object> res = new HashMap<>();
         return res;

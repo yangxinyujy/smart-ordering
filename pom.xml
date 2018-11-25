@@ -200,6 +200,13 @@
       <scope>provided</scope>
     </dependency>
 
+    <!--jsp 模版-->
+    <dependency>
+      <groupId>com.googlecode.rapid-framework</groupId>
+      <artifactId>rapid-core</artifactId>
+      <version>4.0.5</version>
+    </dependency>
+
     <!--百度 ai-->
     <dependency>
       <groupId>com.baidu.aip</groupId>
