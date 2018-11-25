@@ -42,7 +42,8 @@ public class CookController {
     @ApiOperation(value = "检测菜名")
     @GetMapping("/receipt")
     public Map<String, Object> check(){
-
+        Map<String, Object> res = new HashMap<>();
+        return res;
     }
 
     @ApiOperation(value = "打印小票")
@@ -50,6 +51,7 @@ public class CookController {
     public Map<String, Object> print(){
         Map<String, Object> res = new HashMap<>();
 //        PrinterUtil.queryPrinterStatus();
+        return res;
     }
 
 
