@@ -3,10 +3,13 @@
 <mapper namespace="com.whale.mapper.CookMapper">
   <resultMap id="BaseResultMap" type="com.whale.model.Cook">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="cook_id" jdbcType="VARCHAR" property="cookId" />
+    <result column="cook_id" jdbcType="CHAR" property="cookId" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="price" jdbcType="REAL" property="price" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
     <result column="img" jdbcType="VARCHAR" property="img" />
+    <result column="comment" jdbcType="VARCHAR" property="comment" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -67,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    cook_id, name, price, img
+    id, cook_id, name, price, img, comment, created_at, updated_at
   </sql>
   <select id="selectByExample" parameterType="com.whale.model.CookExample" resultMap="BaseResultMap">
     select
@@ -100,10 +103,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.whale.model.Cook">
-    insert into cook (cook_id, name,
-      price, img)
-    values (#{id,jdbcType=INTEGER}, #{cookId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{price,jdbcType=REAL}, #{img,jdbcType=VARCHAR})
+    insert into cook (id, cook_id, name, 
+      price, img, comment, 
+      created_at, updated_at)
+    values (#{id,jdbcType=INTEGER}, #{cookId,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, 
+      #{price,jdbcType=DECIMAL}, #{img,jdbcType=VARCHAR}, #{comment,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.whale.model.Cook">
     insert into cook
@@ -123,22 +128,40 @@
       <if test="img != null">
         img,
       </if>
+      <if test="comment != null">
+        comment,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
       <if test="cookId != null">
-        #{cookId,jdbcType=VARCHAR},
+        #{cookId,jdbcType=CHAR},
       </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
       <if test="price != null">
-        #{price,jdbcType=REAL},
+        #{price,jdbcType=DECIMAL},
       </if>
       <if test="img != null">
         #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="comment != null">
+        #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -155,16 +178,25 @@
         id = #{record.id,jdbcType=INTEGER},
       </if>
       <if test="record.cookId != null">
-        cook_id = #{record.cookId,jdbcType=VARCHAR},
+        cook_id = #{record.cookId,jdbcType=CHAR},
       </if>
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
       </if>
       <if test="record.price != null">
-        price = #{record.price,jdbcType=REAL},
+        price = #{record.price,jdbcType=DECIMAL},
       </if>
       <if test="record.img != null">
         img = #{record.img,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comment != null">
+        comment = #{record.comment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdAt != null">
+        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedAt != null">
+        updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null">
@@ -174,10 +206,13 @@
   <update id="updateByExample" parameterType="map">
     update cook
     set id = #{record.id,jdbcType=INTEGER},
-      cook_id = #{record.cookId,jdbcType=VARCHAR},
+      cook_id = #{record.cookId,jdbcType=CHAR},
       name = #{record.name,jdbcType=VARCHAR},
-      price = #{record.price,jdbcType=REAL},
-      img = #{record.img,jdbcType=VARCHAR}
+      price = #{record.price,jdbcType=DECIMAL},
+      img = #{record.img,jdbcType=VARCHAR},
+      comment = #{record.comment,jdbcType=VARCHAR},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -186,26 +221,38 @@
     update cook
     <set>
       <if test="cookId != null">
-        cook_id = #{cookId,jdbcType=VARCHAR},
+        cook_id = #{cookId,jdbcType=CHAR},
       </if>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
       <if test="price != null">
-        price = #{price,jdbcType=REAL},
+        price = #{price,jdbcType=DECIMAL},
       </if>
       <if test="img != null">
         img = #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="comment != null">
+        comment = #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.whale.model.Cook">
     update cook
-    set cook_id = #{cookId,jdbcType=VARCHAR},
+    set cook_id = #{cookId,jdbcType=CHAR},
       name = #{name,jdbcType=VARCHAR},
-      price = #{price,jdbcType=REAL},
-      img = #{img,jdbcType=VARCHAR}
+      price = #{price,jdbcType=DECIMAL},
+      img = #{img,jdbcType=VARCHAR},
+      comment = #{comment,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
