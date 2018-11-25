@@ -24,9 +24,9 @@ import org.apache.http.util.EntityUtils;
 public class PrinterUtil {
     public static final String URL = "http://api.feieyun.cn/Api/Open/";//不需要修改
 
-    public static final String USER = "819978676@qq.com";//*必填*：账号名
-    public static final String UKEY = "46GUvWGU6wCX7cJe";//*必填*: 注册账号后生成的UKEY
-    public static final String SN = "918507864";//*必填*：打印机编号，必须要在管理后台里添加打印机或调用API接口添加之后，才能调用API
+    public static final String USER = "1";//*必填*：账号名
+    public static final String UKEY = "2";//*必填*: 注册账号后生成的UKEY
+    public static final String SN = "3";//*必填*：打印机编号，必须要在管理后台里添加打印机或调用API接口添加之后，才能调用API
 
 
     //**********测试时，打开下面注释掉方法的即可,更多接口文档信息,请访问官网开放平台查看**********
